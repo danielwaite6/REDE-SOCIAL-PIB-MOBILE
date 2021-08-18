@@ -4,7 +4,7 @@ import { Feather } from '@expo/vector-icons'
 
 
 export const Container = styled.View`
-    width: 100%;
+    width: 85%;
     height: 45px;
     
     padding: 0 16px;
@@ -20,7 +20,6 @@ export const Container = styled.View`
 `;
 
 export const TextInput = styled.TextInput`
-    flex: 1;
     color: #fff;
     font-size: 16px;
     font-family: sans-serif;

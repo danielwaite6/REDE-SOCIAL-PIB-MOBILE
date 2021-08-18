@@ -1,9 +1,11 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
+
+import { Input } from '../../components2/Input'
+
 import {
     Container,
-    Content,
-    Carro
+
 } from './styles';
 
 export function Home() {
@@ -12,11 +14,8 @@ export function Home() {
 
     return (
         <Container>
-            <Content>
-                <Carro>
-                    ALELUIA
-                </Carro>
-            </Content>
+            <Input nameIcon="mail" nameplaceholder="Email" />
+            <Input nameIcon="lock" nameplaceholder="Senha" />
         </Container>
     );
 }

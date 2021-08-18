@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Input } from '../../components/Input';
 
 import {
@@ -9,14 +9,25 @@ import {
 
 export function SignUp() {
 
-    //const [mail, setMail] = useState('');
-    //const [password, setPassword] = useState('');
+    const [perdeu_o_foco, setPerdeu_o_foco] = useState('');
+    //const [ganhou_o_foco, setGanhou_o_foco] = useState('');
 
     const handleLabel = (novoLabel: string) => {
-        //setWord(novoLabel);
         console.log('novoLabel:', novoLabel);
+    };
 
-    }
+    const onBlur = (novoLabel: string) => {
+        setPerdeu_o_foco(novoLabel);
+    };
+
+    /*const onFocus = (novoLabel: string) => {
+        setGanhou_o_foco(novoLabel);
+    };*/
+
+    useEffect(() => {
+        console.log('perdeu_o_foco:', perdeu_o_foco);
+        //console.log('perdeu_o_foco:', ganhou_o_foco);
+    }, [perdeu_o_foco, /**ganhou_o_foco */]);
 
     return (
         <>
@@ -27,11 +38,15 @@ export function SignUp() {
                     changeLabel={handleLabel}
                     nameIcon='mail'
                     nameplaceholder="Email"
+                    perdi_o_foco={onBlur}
+                //ganhou_o_foco={onFocus}
                 />
                 <Input
                     changeLabel={handleLabel}
                     nameIcon='lock'
                     nameplaceholder="Senha"
+                    perdi_o_foco={onBlur}
+                //ganhou_o_foco={onFocus}
                 />
 
 

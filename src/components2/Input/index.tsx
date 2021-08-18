@@ -9,11 +9,13 @@ import {
 interface IconName {
     nameIcon: string;
     nameplaceholder: string;
-    readonly changeLabel: (arg0: string) => void;
+    //readonly changeLabel: (arg0: string) => void;
+    //readonly perdi_o_foco: (arg0: string) => void;
+
 }
 
 
-export function Input({ nameIcon, nameplaceholder, changeLabel }: IconName) {
+export function Input({ nameIcon, nameplaceholder }: IconName) {
 
 
 
@@ -23,7 +25,6 @@ export function Input({ nameIcon, nameplaceholder, changeLabel }: IconName) {
             <TextInput
                 placeholderTextColor='rgba(192, 192, 192, 0.5)'
                 placeholder={nameplaceholder}
-                onChangeText={(text) => changeLabel(text)}
 
             />
         </Container>
