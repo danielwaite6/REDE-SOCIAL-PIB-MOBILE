@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import Input from '../../components2/Input'
 import { Button } from '../../components2/Button'
 import { Container } from './styles';
+import { Text } from 'react-native';
 
 
 interface FormData {
@@ -34,7 +35,17 @@ export function Home() {
             email: form.email,
             password: form.password,
         }
-        console.log('email, password:', data);
+        //console.log('email, password:', data);
+
+        //data.email
+        //data.password
+
+        console.log('data.email:', data.email);
+        console.log('data.password:', data.password);
+
+        setEmail(data.email);
+        setPassword(data.password);
+
     }
 
     return (
@@ -43,6 +54,11 @@ export function Home() {
             <Input nameIcon="lock" nameplaceholder="Digite aqui a sua Senha" control={control} name='password' />
 
             <Button title="Enviar" onPress={handleSubmit(handleRegister)} />
+            <Text></Text>
+            <Text></Text>
+            <Text style={{ color: 'red' }}>{email}</Text>
+            <Text style={{ color: 'red' }}>{password}</Text>
+
         </Container>
     );
 }
