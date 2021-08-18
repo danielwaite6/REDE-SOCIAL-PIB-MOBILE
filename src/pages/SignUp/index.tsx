@@ -28,13 +28,12 @@ export function SignUp() {
                     nameIcon='mail'
                     nameplaceholder="Email"
                 />
-                {
-                    /**<Input
-                    onChangeText={() => { }}
+                <Input
+                    changeLabel={handleLabel}
                     nameIcon='lock'
                     nameplaceholder="Senha"
-                /> */
-                }
+                />
+
 
 
             </Container>
