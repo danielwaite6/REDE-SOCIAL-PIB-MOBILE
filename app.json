@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "rede_social_pib_mobile",
+    "slug": "rede_social_pib_mobile",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "rede_social_pib_mobile"
+}
