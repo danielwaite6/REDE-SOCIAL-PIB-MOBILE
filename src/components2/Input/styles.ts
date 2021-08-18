@@ -5,7 +5,7 @@ import { Feather } from '@expo/vector-icons'
 
 export const Container = styled.View`
     width: 85%;
-    height: 45px;
+    height: 60px;
     
     padding: 0 16px;
     background: #232129;
