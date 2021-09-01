@@ -2,15 +2,15 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 
-import { Home } from '../pages/Home';
+import { SignUp } from '../pages/SignUp';
 
 const { Navigator, Screen } = createStackNavigator();
 
 export function StackRoutes() {
     return (
-        <Navigator headerMode="none" initialRouteName="Home">
+        <Navigator headerMode="none" initialRouteName="SignUp">
 
-            <Screen name="Home" component={Home} />
+            <Screen name="SignUp" component={SignUp} />
 
             {
                 /**<Screen name="Dashboard" component={Dashboard} />

@@ -1,59 +1,76 @@
 import React, { useEffect, useState } from 'react';
-import { Input } from '../../components/Input';
+import { useForm } from 'react-hook-form';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-import {
-    Container,
-    Title
-} from './styles';
+import Input from '../../components2/Input'
+import { Button } from '../../components2/Button'
+import { Container } from './styles';
+import { Text } from 'react-native';
+import { useCallback } from 'react';
+import { api } from '../api';
 
+
+interface FormData {
+    email: string;
+    nome: string;
+    password: string;
+};
+/*
+const schema = Yup.object().shape({
+    name: Yup.string().required('Nome é Obrigatório'),
+    amount: Yup.number().typeError('Informe um valor numérico')
+        .positive('O valor digitado não pode ser negativo')
+});*/
 
 export function SignUp() {
 
-    const [perdeu_o_foco, setPerdeu_o_foco] = useState('');
-    //const [ganhou_o_foco, setGanhou_o_foco] = useState('');
+    //const [nome, setNome] = useState('');
+    //const [email, setEmail] = useState('');
+    //const [password, setPassword] = useState('');
 
-    const handleLabel = (novoLabel: string) => {
-        console.log('novoLabel:', novoLabel);
+    const { control, handleSubmit, formState: { errors } } = useForm({
+        //resolver: yupResolver(schema),
+    });
+
+    async function handleRegister(form: FormData) {
+
+        const data = {
+            nome: form.nome,
+            email: form.email,
+            password: form.password,
+        };
+
+        await api.post('dentistrys', {
+            name: data.nome,
+            email: data.email,
+        });
+
     };
 
-    const onBlur = (novoLabel: string) => {
-        setPerdeu_o_foco(novoLabel);
-    };
+    //const doCallback = useCallback(() => {
 
-    /*const onFocus = (novoLabel: string) => {
-        setGanhou_o_foco(novoLabel);
-    };*/
+    //}, [])
 
     useEffect(() => {
-        console.log('perdeu_o_foco:', perdeu_o_foco);
-        //console.log('perdeu_o_foco:', ganhou_o_foco);
-    }, [perdeu_o_foco, /**ganhou_o_foco */]);
+
+
+
+        /*api.get('dentistrys').then((res) => {
+            console.log('res: ', res.data);
+        });*/
+    }, []);
 
     return (
-        <>
-            <Container>
-                <Title>SignUp</Title>
+        <Container>
+            <Input nameIcon="mail" nameplaceholder="Digite aqui o seu Nome" control={control} name='nome' />
+            <Input nameIcon="mail" nameplaceholder="Digite aqui o seu Email" control={control} name='email' />
+            <Input nameIcon="lock" nameplaceholder="Digite aqui a sua Senha" control={control} name='password' />
 
-                <Input
-                    changeLabel={handleLabel}
-                    nameIcon='mail'
-                    nameplaceholder="Email"
-                    perdi_o_foco={onBlur}
-                //ganhou_o_foco={onFocus}
-                />
-                <Input
-                    changeLabel={handleLabel}
-                    nameIcon='lock'
-                    nameplaceholder="Senha"
-                    perdi_o_foco={onBlur}
-                //ganhou_o_foco={onFocus}
-                />
+            <Button title="Enviar" onPress={handleSubmit(handleRegister)} />
+            <Text></Text>
+            <Text></Text>
 
-
-
-            </Container>
-
-
-        </>
+        </Container>
     );
 }

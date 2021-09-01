@@ -29,8 +29,8 @@ interface FormData {
 
 const schema = Yup.object().shape({
     name: Yup.string().required('Nome é Obrigatório'),
-    amount: Yup.number().typeError('Informe um valor numérico')
-        .positive('O valor digitado não pode ser negativo')
+    //amount: Yup.number().typeError('Informe um valor numérico')
+    //.positive('O valor digitado não pode ser negativo')
 });
 
 
@@ -77,7 +77,7 @@ export function Register() {
             transactionType,
             category: category.key,
         }
-        console.log('Form:', data);
+        //console.log('Form:', data);
 
     }
 
