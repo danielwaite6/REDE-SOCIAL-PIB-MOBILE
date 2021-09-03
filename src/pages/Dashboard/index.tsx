@@ -1,103 +1,81 @@
-import React from 'react';
-import { HighLighterCard } from '../../components/HighLighterCard';
-import { TransactionCard, TransactionCardProps } from '../../components/TransactionCard';
+import React, { useState, useEffect } from 'react';
+import { api } from '../api';
+
+import { Feather } from '@expo/vector-icons'
 
 import {
     Container,
     Header,
-    UserInfo,
-    Photo,
-    User,
-    UserGreeting,
+    HeaderTitle,
     UserName,
-    UserWrapper,
-    Icon,
-    HighLighterCards,
-    Transactions,
-    Title,
-    TransactionList,
-    LogoutButton
+    ProfileButton,
+    ProvidersListTitle,
+    UserAvatar,
+    ProvidersList,
+    ProviderContainer,
+    ProviderAvatar,
+    ProviderInfo,
+    ProviderName,
+    ProviderMeta,
+    ProviderMetaText,
 } from './styles';
-
-export interface DataListProps extends TransactionCardProps {
-    id: string;
-}
 
 export function Dashboard() {
 
-    const data: DataListProps[] = [
-        {
-            id: '1',
-            type: 'positive',
-            title: "Desenvolvimento de Site",
-            amount: "R$ 12.000,00",
-            category: {
-                name: "Vendas",
-                icon: "dollar-sign",
-            },
-            date: "13/05/2020",
-        },
-        {
-            id: '2',
-            type: 'negative',
-            title: "Pizza",
-            amount: "R$ 59,00",
-            category: {
-                name: "Alimentação",
-                icon: "coffee",
-            },
-            date: "13/05/2020",
-        },
-        {
-            id: '3',
-            type: 'negative',
-            title: "Aluguel de casa",
-            amount: "R$ 1.200,00",
-            category: {
-                name: "Casa",
-                icon: "shopping-bag",
-            },
-            date: "13/05/2020",
-        },
-    ];
+    const [listDentistrys, setListDentistrys] = useState([]);
+    /**await api.post('dentistrys', {
+            name: data.nome,
+            email: data.email,
+        }); */
+    useEffect(() => {
+        api.get('dentistrys')
+            .then((res) => {
+                setListDentistrys(res.data);
+            });
+    }, []);
 
     return (
         <Container>
             <Header>
-                <UserWrapper>
-                    <UserInfo>
-                        <Photo source={{ uri: 'https://avatars.githubusercontent.com/u/6205322?v=4' }} />
-                        <User>
-                            <UserGreeting>Olá, </UserGreeting>
-                            <UserName>Daniel Waite </UserName>
-                        </User>
-                    </UserInfo>
-                    <LogoutButton onPress={() => { }}>
-                        <Icon name="power" />
-                    </LogoutButton>
-                </UserWrapper>
+                <HeaderTitle>
+                    Bem Vindo, {"\n"}
+                    <UserName></UserName>
+                </HeaderTitle>
+                <ProfileButton onPress={() => { }}>
+                    <UserAvatar source={{ uri: '' }} />
+                </ProfileButton>
             </Header>
 
-            <HighLighterCards>
-                <HighLighterCard type="up" title="Entradas" amount="R$ 17.000,00" lastTransaction="Última Entrada dia 13 de Abril" />
-                <HighLighterCard type="down" title="Saídas" amount="R$ 3.000,00" lastTransaction="Última Entrada dia 13 de Abril" />
-                <HighLighterCard type="total" title="Total" amount="R$ 14.000,00" lastTransaction="Última Entrada dia 13 de Abril" />
-            </HighLighterCards>
+            <ProvidersList
+                data={listDentistrys}
+                keyExtractor={(item) => item.id}
+                ListHeaderComponent={
+                    <ProvidersListTitle>Dentistas</ProvidersListTitle>
+                }
+                renderItem={({ item: provider }) => (
+                    <ProviderContainer onPress={() => { }}>
+                        {/**<ProviderAvatar source={{ uri: provider.avatar_url }} /> */}
+                        <ProviderInfo>
+
+                            <ProviderName>{provider.name}</ProviderName>
+                            <ProviderName>{provider.email}</ProviderName>
+
+                            <ProviderMeta>
+                                <Feather name="calendar" size={14} color="#ff9000" />
+                                <ProviderMetaText>Segunda à Sexta</ProviderMetaText>
+                            </ProviderMeta>
+
+                            <ProviderMeta>
+                                <Feather name="clock" size={14} color="#ff9000" />
+                                <ProviderMetaText>8h às 18h</ProviderMetaText>
+                            </ProviderMeta>
+
+                        </ProviderInfo>
+                    </ProviderContainer>
+                )}
+            />
 
 
-            <Transactions>
-                <Title>Listagem</Title>
-
-                <TransactionList
-                    keyExtractor={(item) => String(item.id)}
-                    data={data}
-                    renderItem={({ item }) => (
-                        <TransactionCard data={item} />
-                    )}
-                />
-
-
-            </Transactions>
 
         </Container>
     );

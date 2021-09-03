@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -20,14 +21,12 @@ interface FormData {
 const schema = Yup.object().shape({
     name: Yup.string().required('Nome é Obrigatório'),
     amount: Yup.number().typeError('Informe um valor numérico')
-        .positive('O valor digitado não pode ser negativo')
+    .positive('O valor digitado não pode ser negativo')
 });*/
 
 export function SignUp() {
 
-    //const [nome, setNome] = useState('');
-    //const [email, setEmail] = useState('');
-    //const [password, setPassword] = useState('');
+    const { navigate } = useNavigation();
 
     const { control, handleSubmit, formState: { errors } } = useForm({
         //resolver: yupResolver(schema),
@@ -45,21 +44,9 @@ export function SignUp() {
             name: data.nome,
             email: data.email,
         });
-
+        navigate('Dashboard');
     };
 
-    //const doCallback = useCallback(() => {
-
-    //}, [])
-
-    useEffect(() => {
-
-
-
-        /*api.get('dentistrys').then((res) => {
-            console.log('res: ', res.data);
-        });*/
-    }, []);
 
     return (
         <Container>
