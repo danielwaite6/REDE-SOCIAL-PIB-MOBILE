@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
 import { FlatList } from 'react-native';
 
-//import { RectButton } from 'react-native-gesture-handler';
 
 interface Provider {
     id: string;
@@ -45,13 +44,13 @@ export const UserAvatar = styled.Image`
 
 export const ProvidersList = styled(FlatList as new () => FlatList<Provider>)`
     padding: 32px 24px 16px;
+    background-color: 'rgb(0, 0, 20)'
 `;
 
 export const ProvidersListTitle = styled.Text`
     font-size: 24px;
     margin-bottom: 24px;
     color: #f4ede8;
-    font-family: 'Times New Roman';
 `
 
 
