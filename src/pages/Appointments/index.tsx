@@ -17,7 +17,8 @@ import {
     DentistrysName,
     DentistrysMeta,
     DentistrysMetaText,
-    DentistrysContainer
+    DentistrysContainer,
+    Avatar
 } from './styles';
 
 
@@ -96,28 +97,23 @@ export function Appointments() {
                 <DentistrysList
                     data={dentistrys}
                     keyExtractor={(dentistry) => dentistry.id}
-                    //ListFooterComponent={
-                    //() => { }
-                    //}
                     renderItem={({ item }) => (
                         <DentistrysContainer onPress={() => { }}>
                             {/**<PatientAvatar source={{ uri: item.avatar_url }} /> */}
 
                             {
-                                /**<TouchableOpacity onPress={() => { }}>
-                                <FastImage
-                                    style={{ width: 80, height: 80, borderRadius: 50, }}
-                                    source={{
-                                        uri: '',
-                                        priority: FastImage.priority.high,
-                                    }}
-                                    resizeMode={FastImage.resizeMode.stretch}
-                                />
-                            </TouchableOpacity> */
+                                <TouchableOpacity onPress={() => { }}>
+                                    <Avatar
+                                        source={{
+                                            uri: '',
+                                        }}
+                                    />
+                                </TouchableOpacity>
                             }
 
                             <DentistrysInfo>
 
+                                <DentistrysName>{item.id}</DentistrysName>
                                 <DentistrysName>{item.name}</DentistrysName>
 
                                 <DentistrysMeta>

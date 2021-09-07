@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
-import { FlatList } from 'react-native';
+import { FlatList, Image } from 'react-native';
 
 interface HourProps {
   selected: boolean;
@@ -23,14 +23,12 @@ export const Container = styled.View`
 export const Title = styled.Text`
     font-size: 16px;
     color: #5F9EA0;
-    font-family: 'sans-serif';
     margin-top: 15px;
     margin-left: 10px;
     padding: 5px;
 `;
 
 export const Description = styled.Text`
-  font-family: 'RobotoSlab-Regular';
   font-size: 18px;
   color: #999591;
   margin-top: 16px;
@@ -47,7 +45,6 @@ export const OkButton = styled(RectButton)`
 `;
 
 export const OkButtonText = styled.Text`
-  font-family: 'RobotoSlab-Medium';
   color: #312e38;
   font-size: 18px;
 `;
@@ -86,10 +83,16 @@ export const CalendarContainer = styled.View`
   margin-bottom: 60px;
 `;*/
 
-export const DentistrysList = styled(FlatList as new () => FlatList<IDentistrys>)`
+export const DentistrysList = styled(FlatList as new () => FlatList<IDentistrys>).attrs({
+  contentContainerStyle: {
+    paddingBottom: 400
+  }
+})`
   margin-top: 10px;
   margin-right: 12px;
   margin-bottom: 60px;
+  
+  
 `;
 
 export const DentistrysContainer = styled.TouchableOpacity`
@@ -99,6 +102,10 @@ export const DentistrysContainer = styled.TouchableOpacity`
   margin-bottom: 1px;
   flex-direction: row;
   align-items: center;
+
+  
+  
+  
 `;
 
 export const PatientAvatar = styled.Image`
@@ -109,13 +116,12 @@ export const PatientAvatar = styled.Image`
 `;
 
 export const DentistrysInfo = styled.View`
-  flex: 1;
-  flex-direction: column;
+  
+  
   margin-left: 20px;
 `;
 
 export const DentistrysName = styled.Text`
-  font-family: 'Times New Roman';
   font-size: 18px;
   color: #f4ede8;
 `;
@@ -130,7 +136,6 @@ export const DentistrysMetaText = styled.Text`
   margin-left: 8px;
   color: #5F9EA0;
   font-weight: bold;
-  font-family: 'Times New Roman';
   font-size: 22px;
 `;
 
@@ -158,7 +163,6 @@ export const Section = styled.View`
 export const SectionTitle = styled.Text`
   font-size: 18px;
   color: #999591;
-  font-family: 'RobotoSlab-Regular';
   margin: 0 24px 12px;
 `;
 
@@ -180,7 +184,6 @@ export const Hour = styled(RectButton) <HourProps>`
 
 export const HourText = styled.Text<HourProps>`
   color: ${props => (props.selected ? '#232129' : '#f4ede8')};
-  font-family: 'RobotoSlab-Regular';
   font-size: 16px;
 `;
 ////////////////////////////////////////////////////////////////////////
@@ -223,7 +226,13 @@ export const UserAvatar = styled.Image`
 export const TitleAvatar = styled.Text`
     font-size: 18px;
     color: #5F9EA0;
-    font-family: 'sans-serif';
     margin-left: 35px;
     margin-top:  50px;
+`;
+
+export const Avatar = styled.Image`
+    width: 72px;
+    height: 72px;
+    border-radius: 36px;
+    background-color: #ff9000;
 `;
