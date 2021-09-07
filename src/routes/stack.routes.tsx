@@ -3,7 +3,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 
 import { SignUp } from '../pages/SignUp';
-//import { Dashboard } from '../pages/Dashboard';
 import { AppTabsRoutes } from '../pages/Dashboard/app.routes';
 
 const { Navigator, Screen } = createStackNavigator();

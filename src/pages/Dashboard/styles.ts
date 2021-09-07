@@ -28,7 +28,6 @@ export const HeaderTitle = styled.Text`
 
 export const UserName = styled.Text`
     color: #ff9000;
-    font-family: 'Times New Roman';
 `;
 
 export const ProfileButton = styled.TouchableOpacity`
@@ -75,7 +74,6 @@ export const ProviderInfo = styled.View`
 `;
 
 export const ProviderName = styled.Text`
-    font-family: 'Times New Roman';
     font-size: 18px;
     color: #f4ede8;
 `;
@@ -89,5 +87,4 @@ export const ProviderMeta = styled.View`
 export const ProviderMetaText = styled.Text`
     margin-left: 8px;
     color: #999591;
-    font-family: 'Times New Roman';
 `;
