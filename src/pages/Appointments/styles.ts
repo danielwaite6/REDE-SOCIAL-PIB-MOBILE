@@ -3,8 +3,14 @@ import { RectButton } from 'react-native-gesture-handler';
 import { FlatList } from 'react-native';
 
 interface HourProps {
-    selected: boolean;
-}
+  selected: boolean;
+};
+
+interface IDentistrys {
+  id: string;
+  name: string;
+  email: string;
+};
 
 
 export const Container = styled.View`
@@ -80,7 +86,13 @@ export const CalendarContainer = styled.View`
   margin-bottom: 60px;
 `;*/
 
-export const PatientContainer = styled.TouchableOpacity`
+export const DentistrysList = styled(FlatList as new () => FlatList<IDentistrys>)`
+  margin-top: 10px;
+  margin-right: 12px;
+  margin-bottom: 60px;
+`;
+
+export const DentistrysContainer = styled.TouchableOpacity`
   background: #3e3b47;
   border-radius: 10px;
   padding: 10px;
@@ -96,25 +108,25 @@ export const PatientAvatar = styled.Image`
   background: #ff9000;
 `;
 
-export const PatientInfo = styled.View`
+export const DentistrysInfo = styled.View`
   flex: 1;
   flex-direction: column;
   margin-left: 20px;
 `;
 
-export const PatientName = styled.Text`
+export const DentistrysName = styled.Text`
   font-family: 'Times New Roman';
   font-size: 18px;
   color: #f4ede8;
 `;
 
-export const PatientMeta = styled.View`
+export const DentistrysMeta = styled.View`
   flex-direction: row;
   align-items: center;
   margin-top: 8px;
 `;
 
-export const PatientMetaText = styled.Text`
+export const DentistrysMetaText = styled.Text`
   margin-left: 8px;
   color: #5F9EA0;
   font-weight: bold;
@@ -153,9 +165,9 @@ export const SectionTitle = styled.Text`
 
 
 export const SectionContent = styled.ScrollView.attrs({
-    contentContainerStyle: { paddingHorizontal: 24 },
-    horizontal: true,
-    showsHorizontalScrollIndicator: false,
+  contentContainerStyle: { paddingHorizontal: 24 },
+  horizontal: true,
+  showsHorizontalScrollIndicator: false,
 })``;
 
 
