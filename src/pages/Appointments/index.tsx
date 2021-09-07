@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
-import FastImage from 'react-native-fast-image';
 import { useForm } from 'react-hook-form';
 import { api } from '../api';
 import { Feather } from '@expo/vector-icons'
@@ -93,48 +92,50 @@ export function Appointments() {
                 </Main>
 
 
-                <Main>
-                    <DentistrysList
-                        data={dentistrys}
-                        keyExtractor={(dentistry) => dentistry.id}
-                        //ListFooterComponent={
-                        //() => { }
-                        //}
-                        renderItem={({ item }) => (
-                            <DentistrysContainer onPress={() => { }}>
-                                {/**<PatientAvatar source={{ uri: item.avatar_url }} /> */}
 
-                                <TouchableOpacity onPress={() => { }}>
-                                    <FastImage
-                                        style={{ width: 80, height: 80, borderRadius: 50, }}
-                                        source={{
-                                            uri: '',
-                                            priority: FastImage.priority.high,
-                                        }}
-                                        resizeMode={FastImage.resizeMode.stretch}
-                                    />
-                                </TouchableOpacity>
+                <DentistrysList
+                    data={dentistrys}
+                    keyExtractor={(dentistry) => dentistry.id}
+                    //ListFooterComponent={
+                    //() => { }
+                    //}
+                    renderItem={({ item }) => (
+                        <DentistrysContainer onPress={() => { }}>
+                            {/**<PatientAvatar source={{ uri: item.avatar_url }} /> */}
 
-                                <DentistrysInfo>
+                            {
+                                /**<TouchableOpacity onPress={() => { }}>
+                                <FastImage
+                                    style={{ width: 80, height: 80, borderRadius: 50, }}
+                                    source={{
+                                        uri: '',
+                                        priority: FastImage.priority.high,
+                                    }}
+                                    resizeMode={FastImage.resizeMode.stretch}
+                                />
+                            </TouchableOpacity> */
+                            }
 
-                                    <DentistrysName>{item.name}</DentistrysName>
+                            <DentistrysInfo>
 
-                                    <DentistrysMeta>
-                                        <Feather name="calendar" size={26} color="#ff9000" />
-                                        <DentistrysMetaText>12/02/2013</DentistrysMetaText>
-                                    </DentistrysMeta>
+                                <DentistrysName>{item.name}</DentistrysName>
 
-                                    <DentistrysMeta>
-                                        <Feather name="clock" size={26} color="#ff9000" />
-                                        <DentistrysMetaText>19:00</DentistrysMetaText>
-                                    </DentistrysMeta>
+                                <DentistrysMeta>
+                                    <Feather name="calendar" size={26} color="#ff9000" />
+                                    <DentistrysMetaText>12/02/2013</DentistrysMetaText>
+                                </DentistrysMeta>
 
-                                </DentistrysInfo>
-                            </DentistrysContainer>
-                        )}
+                                <DentistrysMeta>
+                                    <Feather name="clock" size={26} color="#ff9000" />
+                                    <DentistrysMetaText>19:00</DentistrysMetaText>
+                                </DentistrysMeta>
 
-                    />
-                </Main>
+                            </DentistrysInfo>
+                        </DentistrysContainer>
+                    )}
+
+                />
+
 
 
 
