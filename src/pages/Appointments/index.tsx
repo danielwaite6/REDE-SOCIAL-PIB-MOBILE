@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, Text, View } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { api } from '../api';
 import { Feather } from '@expo/vector-icons'
@@ -37,11 +37,34 @@ interface IDentistrys {
     email: string;
 };
 
+interface IPatients {
+    id: string;
+    name: string;
+    email: string;
+    cel1: string;
+    cel2: string;
+};
+
 
 export function Appointments() {
 
 
-    const [dentistrys, setDentistrys] = useState<IDentistrys[]>([]);
+    const [dentistryss, setDentistryss] = useState<IDentistrys[]>([]);
+    const [dentistryssx, setDentistryssx] = useState({} as IDentistrys);
+
+    const [patients, setPatients] = useState<IPatients[]>([]);
+
+
+    const [idDentistry, setIdDentistry] = useState('');
+    const [habilitado, setHabilitado] = useState(false);
+
+    const [idPatient, setIdPatient] = useState('');
+
+
+
+    const [varControle, setVarControle] = useState(false);
+
+
 
     const { control, handleSubmit, formState: { errors } } = useForm({
         //resolver: yupResolver(schema),
@@ -57,21 +80,40 @@ export function Appointments() {
             cel2: form.cel2
         };
 
-        await api.post('patients', {
-            name: data.nome,
-            email: data.email,
-            //password: data.password,
-            cel1: data.cel1,
-            cel2: data.cel2,
-        });
 
+        try {
+            await api.post('patients/createPatientDentistry', {
+                dentistry_id: idDentistry,
+                patient_id: idPatient
+            });
+        } catch (error) {
+            //console.log(error);
+        }
+
+    };
+
+    function getIdDentistry(value: string) {
+        setVarControle(true)
+        setIdDentistry(value);
+    };
+
+    function getIdPatient(value: string) {
+        setVarControle(false)
+        setIdPatient(value);
     };
 
 
     useEffect(() => {
         api.get('dentistrys')
             .then((res) => {
-                setDentistrys(res.data);
+                setDentistryss(res.data);
+            });
+    }, []);
+
+    useEffect(() => {
+        api.get('patients')
+            .then((res) => {
+                setPatients(res.data);
             });
     }, []);
 
@@ -82,55 +124,56 @@ export function Appointments() {
 
                 <Header />
                 <Main>{/**  <Main> é um SCROLLVIEW */}
-                    <Title> AGENDAMENTOS DE PACIENTES. </Title>
-
-                    <Input nameIcon="mail" nameplaceholder="Digite aqui o seu Nome" control={control} name='nome' />
-                    <Input nameIcon="mail" nameplaceholder="Digite aqui o seu Email" control={control} name='email' />
-                    <Input nameIcon="lock" nameplaceholder="Digite aqui seu nº de celular" control={control} name='cel1' />
-                    <Input nameIcon="lock" nameplaceholder="Digite aqui outro nº de celular" control={control} name='cel2' />
+                    <Title> AGENDAMENTO DE PACIENTES. </Title>
+                    <Title> Selecione um Dentista para atendimento.</Title>
 
                     <Button title="Enviar" onPress={handleSubmit(handleRegister)} />
+
+                    <Text></Text>
+                    <Text></Text>
+                    <Text></Text>
+                    <Text></Text>
+                    <Text></Text>
+                    <Text></Text>
                 </Main>
 
 
 
-                <DentistrysList
-                    data={dentistrys}
-                    keyExtractor={(dentistry) => dentistry.id}
-                    renderItem={({ item }) => (
-                        <DentistrysContainer onPress={() => { }}>
-                            {/**<PatientAvatar source={{ uri: item.avatar_url }} /> */}
 
-                            {
-                                <TouchableOpacity onPress={() => { }}>
-                                    <Avatar
-                                        source={{
-                                            uri: '',
-                                        }}
-                                    />
-                                </TouchableOpacity>
-                            }
-
-                            <DentistrysInfo>
-
-                                <DentistrysName>{item.id}</DentistrysName>
-                                <DentistrysName>{item.name}</DentistrysName>
-
-                                <DentistrysMeta>
-                                    <Feather name="calendar" size={26} color="#ff9000" />
-                                    <DentistrysMetaText>12/02/2013</DentistrysMetaText>
-                                </DentistrysMeta>
-
-                                <DentistrysMeta>
-                                    <Feather name="clock" size={26} color="#ff9000" />
-                                    <DentistrysMetaText>19:00</DentistrysMetaText>
-                                </DentistrysMeta>
-
-                            </DentistrysInfo>
-                        </DentistrysContainer>
-                    )}
-
-                />
+                {
+                    varControle ?
+                        (
+                            <View>
+                                <Text>Selecione um Paciente</Text>
+                                <DentistrysList
+                                    data={patients}
+                                    keyExtractor={(item) => item.id}
+                                    renderItem={({ item }) => (
+                                        <DentistrysContainer onPress={() => getIdPatient(item.id)}>
+                                            <Feather name="clock" size={26} color="#ff9000" />
+                                            <DentistrysName>{item.name}</DentistrysName>
+                                        </DentistrysContainer>
+                                    )}
+                                />
+                            </View>
+                        )
+                        :
+                        (
+                            <View>
+                                <Text>Selecione um Dentista</Text>
+                                <DentistrysList
+                                    data={dentistryss}
+                                    keyExtractor={(item) => item.id}
+                                    renderItem={({ item }) => (
+                                        <DentistrysContainer onPress={() => getIdDentistry(item.id)}>
+                                            <Feather name="clock" size={26} color="#ff9000" />
+                                            <DentistrysName>{item.name}</DentistrysName>
+                                        </DentistrysContainer>
+                                    )}
+                                />
+                            </View>
+                        )
+                }
 
 
 

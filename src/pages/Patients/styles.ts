@@ -93,13 +93,6 @@ export const DentistrysList = styled(FlatList as new () => FlatList<IDentistrys>
   margin-bottom: 60px;
 `;
 
-export const PatientAvatar = styled.Image`
-  width: 60px;
-  height: 60px;
-  border-radius: 36px;
-  background: #ff9000;
-`;
-
 export const DentistrysContainer = styled.TouchableOpacity`
   background: #3e3b47;
   border-radius: 10px;
@@ -107,16 +100,28 @@ export const DentistrysContainer = styled.TouchableOpacity`
   margin-bottom: 1px;
   flex-direction: row;
   align-items: center;
+
+  
+  
+  
+`;
+
+export const PatientAvatar = styled.Image`
+  width: 60px;
+  height: 60px;
+  border-radius: 36px;
+  background: #ff9000;
 `;
 
 export const DentistrysInfo = styled.View`
+  
+  
   margin-left: 20px;
 `;
 
 export const DentistrysName = styled.Text`
   font-size: 18px;
   color: #f4ede8;
-  margin-left: 10px;
 `;
 
 export const DentistrysMeta = styled.View`

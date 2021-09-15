@@ -14,12 +14,6 @@ export function StackRoutes() {
             <Screen name="SignUp" component={SignUp} />
             <Screen name="Dashboard" component={AppTabsRoutes} />
 
-            {
-                /**<Screen name="Dashboard" component={Dashboard} />
-            <Screen name="Dashboard" component={Dashboard} /> */
-            }
-
-
         </Navigator>
     )
 }

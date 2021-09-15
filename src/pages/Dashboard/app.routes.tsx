@@ -3,6 +3,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useTheme } from 'styled-components';
 import { Dashboard } from '.';
+import { Patients } from '../Patients';
 import { Appointments } from '../Appointments'
 
 const { Navigator, Screen } = createBottomTabNavigator();
@@ -39,6 +40,20 @@ export function AppTabsRoutes() {
 
             <Screen
                 name="Pacientes"
+                component={Patients}
+                options={{
+                    tabBarIcon: (({ size, color }) => (
+                        <MaterialIcons
+                            name="account-circle"
+                            size={size}
+                            color={color}
+                        />
+                    ))
+                }}
+            />
+
+            <Screen
+                name="Agendamentos"
                 component={Appointments}
                 options={{
                     tabBarIcon: (({ size, color }) => (
