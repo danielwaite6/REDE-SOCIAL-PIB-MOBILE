@@ -13,6 +13,7 @@ import {
     Title,
     Wrapper,
     DentistrysList,
+    PatientsList,
     DentistrysInfo,
     DentistrysName,
     DentistrysMeta,
@@ -53,6 +54,7 @@ export function Appointments() {
     const [dentistryssx, setDentistryssx] = useState({} as IDentistrys);
 
     const [patients, setPatients] = useState<IPatients[]>([]);
+    const [patientsssx, setPatientsssx] = useState({} as IPatients);
 
 
     const [idDentistry, setIdDentistry] = useState('');
@@ -92,14 +94,14 @@ export function Appointments() {
 
     };
 
-    function getIdDentistry(value: string) {
-        setVarControle(true)
-        setIdDentistry(value);
+    function getIdDentistry(dentistry: IDentistrys) {
+        setVarControle(true);
+        setDentistryssx(dentistry);
     };
 
-    function getIdPatient(value: string) {
-        setVarControle(false)
-        setIdPatient(value);
+    function getIdPatient(patient: IPatients) {
+        setVarControle(false);
+        setPatientsssx(patient);
     };
 
 
@@ -125,9 +127,10 @@ export function Appointments() {
                 <Header />
                 <Main>{/**  <Main> é um SCROLLVIEW */}
                     <Title> AGENDAMENTO DE PACIENTES. </Title>
-                    <Title> Selecione um Dentista para atendimento.</Title>
 
                     <Button title="Enviar" onPress={handleSubmit(handleRegister)} />
+                    <Title>Dentista: {dentistryssx.name}</Title>
+                    <Title>Paciente: {patientsssx.name}</Title>
 
                     <Text></Text>
                     <Text></Text>
@@ -135,6 +138,12 @@ export function Appointments() {
                     <Text></Text>
                     <Text></Text>
                     <Text></Text>
+                    <Text></Text>
+                    <Text></Text>
+                    <Text></Text>
+                    <Text></Text>
+                    <Text></Text>
+
                 </Main>
 
 
@@ -145,11 +154,11 @@ export function Appointments() {
                         (
                             <View>
                                 <Text>Selecione um Paciente</Text>
-                                <DentistrysList
+                                <PatientsList
                                     data={patients}
                                     keyExtractor={(item) => item.id}
                                     renderItem={({ item }) => (
-                                        <DentistrysContainer onPress={() => getIdPatient(item.id)}>
+                                        <DentistrysContainer onPress={() => getIdPatient(item)}>
                                             <Feather name="clock" size={26} color="#ff9000" />
                                             <DentistrysName>{item.name}</DentistrysName>
                                         </DentistrysContainer>
@@ -165,7 +174,7 @@ export function Appointments() {
                                     data={dentistryss}
                                     keyExtractor={(item) => item.id}
                                     renderItem={({ item }) => (
-                                        <DentistrysContainer onPress={() => getIdDentistry(item.id)}>
+                                        <DentistrysContainer onPress={() => getIdDentistry(item)}>
                                             <Feather name="clock" size={26} color="#ff9000" />
                                             <DentistrysName>{item.name}</DentistrysName>
                                         </DentistrysContainer>

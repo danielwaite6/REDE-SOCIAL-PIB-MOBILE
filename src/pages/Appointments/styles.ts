@@ -12,6 +12,14 @@ interface IDentistrys {
   email: string;
 };
 
+interface IPatients {
+  id: string;
+  name: string;
+  email: string;
+  cel1: string;
+  cel2: string;
+};
+
 
 export const Container = styled.View`
   flex: 1;
@@ -92,6 +100,18 @@ export const DentistrysList = styled(FlatList as new () => FlatList<IDentistrys>
   margin-right: 12px;
   margin-bottom: 60px;
 `;
+
+export const PatientsList = styled(FlatList as new () => FlatList<IPatients>).attrs({
+  contentContainerStyle: {
+    paddingBottom: 400
+  }
+})`
+  margin-top: 10px;
+  margin-right: 12px;
+  margin-bottom: 60px;
+`;
+
+
 
 export const PatientAvatar = styled.Image`
   width: 60px;
